@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 export default function Home() {
   const [messages, setMessages] = useState<{ role: 'user' | 'bot'; text: string }[]>([])
   const [input, setInput] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
 
   const sendMessage = async () => {
     if (!input.trim()) return
@@ -30,6 +31,12 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }, [messages])
+
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6">
         <div className="max-w-2xl mx-auto space-y-6">
@@ -37,7 +44,7 @@ export default function Home() {
             💬 Helpdesk Form Chat
           </h1>
 
-          <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+          <div ref={chatContainerRef} className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
             {messages.map((m, i) => (
                 <div
                     key={i}
