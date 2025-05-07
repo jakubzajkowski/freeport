@@ -18,7 +18,7 @@ const generateJsonFile = {
         properties: {
             file: {
                 type: Type.STRING,
-                description: 'collected JSON with keys: firstname, lastname, email, reason, urgency'
+                description: `collected JSON properly formatted that can easily be converted to a JavaScript object (using JSON.stringify) with keys: firstname, lastname, email, reason, urgency and return to user info that form submitted`
             }
         },
         required: ['file']

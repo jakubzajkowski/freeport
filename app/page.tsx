@@ -24,7 +24,9 @@ export default function Home() {
       const data = await res.json()
 
       setMessages((prev) => [...prev, { role: 'bot', text: data.response }])
-    } catch (err) {
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    catch (err) {
       setMessages((prev) => [...prev, { role: 'bot', text: '❌ Server side error' }])
     } finally {
       setLoading(false)
